@@ -14,11 +14,11 @@ class MapContainer extends Component {
     }
 
     render() {
-        const {location} = this.props;
+        const {location, images} = this.props;
 
         return (
             <div>
-                <Map location={location}/>
+                <Map location={location} images={images}/>
             </div>
         );
     }
@@ -26,12 +26,14 @@ class MapContainer extends Component {
 
 MapContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    images: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        location: state.location
+        location: state.location,
+        images: state.images
     };
 }
 
