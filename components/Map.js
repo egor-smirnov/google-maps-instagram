@@ -28,6 +28,18 @@ function returnLoadingElement() {
     );
 }
 
+function renderInfoWindow(image) {
+    return (
+        <InfoWindow key={`info_window_${image.index}`}>
+            <div>
+                <strong>{image.caption}</strong>
+                <br />
+                <img src={image.src}/>
+            </div>
+        </InfoWindow>
+    );
+}
+
 function returnContainerElement() {
     return (
         <div style={{ width: '800px', height: '600px' }}/>
@@ -47,7 +59,7 @@ function returnGoogleMapElement({location, images, dispatch}) {
                         position={{lat: image.latitude, lng: image.longitude}}
                         onClick={() => handleMarkerClick(dispatch, index)}
                     >
-                        {image.isPopupOpened ? <ImagePopup image={image} /> : null}                        
+                        {image.isPopupOpened ? renderInfoWindow(image) : null}                        
                     </Marker>
                 );
             })}
