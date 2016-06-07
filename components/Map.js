@@ -31,14 +31,14 @@ function returnContainerElement() {
     );
 }
 
-function returnGoogleMapElement({latitude, longitude}) {
+function returnGoogleMapElement({location}) {
     return (
         <GoogleMap
             defaultZoom={14}
-            defaultCenter={{lat: latitude, lng: longitude}}
+            defaultCenter={{lat: location.latitude, lng: location.longitude}}
         >
             <Marker
-                position={{lat: latitude, lng: longitude}}
+                position={{lat: location.latitude, lng: location.longitude}}
                 title={'test title'}
             />
         </GoogleMap>
@@ -46,8 +46,7 @@ function returnGoogleMapElement({latitude, longitude}) {
 }
 
 Map.propTypes = {
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired
+    location: PropTypes.object.isRequired
 };
 
 export default Map;
