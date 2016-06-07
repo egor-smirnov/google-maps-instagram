@@ -31,22 +31,28 @@ function returnContainerElement() {
     );
 }
 
-function returnGoogleMapElement({location}) {
+function returnGoogleMapElement({location, images}) {
     return (
         <GoogleMap
-            defaultZoom={14}
+            defaultZoom={12}
             defaultCenter={{lat: location.latitude, lng: location.longitude}}
         >
-            <Marker
-                position={{lat: location.latitude, lng: location.longitude}}
-                title={'test title'}
-            />
+            {images.map((image, index) => {
+                return (
+                    <Marker
+                        key={index}
+                        position={{lat: image.latitude, lng: image.longitude}}
+                        title={'test title'}
+                    />
+                );
+            })}
         </GoogleMap>
     );
 }
 
 Map.propTypes = {
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    images: PropTypes.array
 };
 
 export default Map;
