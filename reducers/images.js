@@ -1,6 +1,10 @@
 import { IMAGES, POPUPS } from '../constants/ActionTypes';
 
 export function images(state = [], action) {
+
+    // array.slice() is used to prevent mutations to the original state
+    const newState = state.slice(0);
+
     switch (action.type) {
 
         case IMAGES.SUCCESS_BY_LOCATION:
@@ -18,13 +22,12 @@ export function images(state = [], action) {
 
         case POPUPS.OPEN_IMAGE_POPUP:
             
-            // array.slice() is used to prevent mutations to the original state
+            newState[action.index].isPopupOpened = true;            
+            return newState;
+
+        case POPUPS.CLOSE_IMAGE_POPUP:
             
-            const { index } = action;            
-            const newState = state.slice(0);
-            
-            newState[index].isPopupOpened = true;
-            
+            newState[action.index].isPopupOpened = false;
             return newState;
 
         default:

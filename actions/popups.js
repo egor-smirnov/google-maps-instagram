@@ -6,3 +6,10 @@ export function openImagePopup(index) {
         index
     };
 }
+
+export function closeImagePopup(index) {
+    return {
+        type: POPUPS.CLOSE_IMAGE_POPUP,
+        index
+    };
+}

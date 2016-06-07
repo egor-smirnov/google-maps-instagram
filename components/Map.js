@@ -3,7 +3,7 @@ import { default as ScriptjsLoader } from 'react-google-maps/lib/async/ScriptjsL
 import { GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
 import ImagePopup from './ImagePopup';
-import { openImagePopup } from '../actions/popups';
+import { openImagePopup, closeImagePopup } from '../actions/popups';
 
 const version = Math.ceil(Math.random() * 22);
 
@@ -28,9 +28,9 @@ function returnLoadingElement() {
     );
 }
 
-function renderInfoWindow(image) {
+function renderInfoWindow(dispatch, image) {
     return (
-        <InfoWindow key={`info_window_${image.index}`}>
+        <InfoWindow key={`info_window_${image.index}`} onCloseclick={() => handleCloseClick(dispatch, image.index)}>
             <div>
                 <strong>{image.caption}</strong>
                 <br />
@@ -59,7 +59,7 @@ function returnGoogleMapElement({location, images, dispatch}) {
                         position={{lat: image.latitude, lng: image.longitude}}
                         onClick={() => handleMarkerClick(dispatch, index)}
                     >
-                        {image.isPopupOpened ? renderInfoWindow(image) : null}                        
+                        {image.isPopupOpened ? renderInfoWindow(dispatch, image) : null}                        
                     </Marker>
                 );
             })}
@@ -69,6 +69,10 @@ function returnGoogleMapElement({location, images, dispatch}) {
 
 function handleMarkerClick(dispatch, index) {
     dispatch(openImagePopup(index));
+}
+
+function handleCloseClick(dispatch, index) {
+    dispatch(closeImagePopup(index));
 }
 
 Map.propTypes = {
