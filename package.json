@@ -29,7 +29,7 @@
     "webpack-hot-middleware": "2.10.0"
   },
   "dependencies": {
-    "isomorphic-fetch": "2.2.1",
+    "fetch-jsonp": "1.0.0",
     "react": "15.0.1",
     "react-dom": "15.0.1",
     "react-google-maps": "4.11.0",
