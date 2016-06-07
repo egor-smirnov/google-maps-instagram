@@ -14,6 +14,25 @@ export function getImagesByLocation({latitude, longitude}) {
     };
 }
 
+export function likeImage(imageId) {
+
+    const options = {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            access_token: INSTAGRAM_ACCESS_TOKEN
+        })
+    };
+
+    return dispatch => {
+        return fetch(`https://api.instagram.com/v1/media/${imageId}/likes`, options)
+            .then((response) => response.json());
+    };    
+}
+
 function requestImagesByLocation() {
     return {
         type: IMAGES.REQUEST_BY_LOCATION

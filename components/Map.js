@@ -3,6 +3,7 @@ import { default as ScriptjsLoader } from 'react-google-maps/lib/async/ScriptjsL
 import { GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
 import ImagePopup from './ImagePopup';
+import LikeBlock from './LikeBlock';
 import { openImagePopup, closeImagePopup } from '../actions/popups';
 
 const version = Math.ceil(Math.random() * 22);
@@ -35,6 +36,8 @@ function renderInfoWindow(dispatch, image) {
                 <strong>{image.caption}</strong>
                 <br />
                 <img src={image.src}/>
+                <br />
+                <LikeBlock image={image} dispatch={dispatch} />
             </div>
         </InfoWindow>
     );

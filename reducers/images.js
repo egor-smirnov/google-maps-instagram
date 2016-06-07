@@ -16,7 +16,9 @@ export function images(state = [], action) {
                     caption: media.location.name,
                     latitude: media.location.latitude,
                     longitude: media.location.longitude,
-                    isPopupOpened: false
+                    imageId: media.id,
+                    isPopupOpened: false,
+                    liked: false
                 };
             });
 
