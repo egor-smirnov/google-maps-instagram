@@ -14,11 +14,11 @@ class MapContainer extends Component {
     }
 
     render() {
-        const {location, images} = this.props;
+        const {location, images, dispatch} = this.props;
 
         return (
             <div>
-                <Map location={location} images={images}/>
+                <Map location={location} images={images} dispatch={dispatch} />
             </div>
         );
     }

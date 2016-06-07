@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import { default as ScriptjsLoader } from 'react-google-maps/lib/async/ScriptjsLoader';
-import { GoogleMap, Marker } from 'react-google-maps';
+import { GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+
+import ImagePopup from './ImagePopup';
+import { openImagePopup } from '../actions/popups';
 
 const version = Math.ceil(Math.random() * 22);
 
@@ -27,11 +30,11 @@ function returnLoadingElement() {
 
 function returnContainerElement() {
     return (
-        <div style={{ width: '500px', height: '400px' }}/>
+        <div style={{ width: '800px', height: '600px' }}/>
     );
 }
 
-function returnGoogleMapElement({location, images}) {
+function returnGoogleMapElement({location, images, dispatch}) {
     return (
         <GoogleMap
             defaultZoom={12}
@@ -42,15 +45,22 @@ function returnGoogleMapElement({location, images}) {
                     <Marker
                         key={index}
                         position={{lat: image.latitude, lng: image.longitude}}
-                        title={'test title'}
-                    />
+                        onClick={() => handleMarkerClick(dispatch, index)}
+                    >
+                        {image.isPopupOpened ? <ImagePopup image={image} /> : null}                        
+                    </Marker>
                 );
             })}
         </GoogleMap>
     );
 }
 
+function handleMarkerClick(dispatch, index) {
+    dispatch(openImagePopup(index));
+}
+
 Map.propTypes = {
+    dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     images: PropTypes.array
 };

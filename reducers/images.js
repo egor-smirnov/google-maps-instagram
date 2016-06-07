@@ -5,12 +5,14 @@ export function images(state = [], action) {
 
         case IMAGES.SUCCESS_BY_LOCATION:
             
-            return action.data.map((media) => {
+            return action.data.map((media, index) => {
                 return {
-                    src: media.images.low_resolution.url,
+                    index,
+                    src: media.images.thumbnail.url,
                     caption: media.location.name,
                     latitude: media.location.latitude,
-                    longitude: media.location.longitude
+                    longitude: media.location.longitude,
+                    isPopupOpened: false
                 };
             });
 
